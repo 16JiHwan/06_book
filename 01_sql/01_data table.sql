@@ -34,6 +34,23 @@
    MOD_DATE   DATE                                 ||
    ------------------------------------------------||
 */
+-- 시퀀스 생성하기 -----------------
+DROP SEQUENCE SEQ_BOOK;
+CREATE SEQUENCE SEQ_BOOK
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE
+    NOCYCLE;
+    
+DROP SEQUENCE SEQ_MANAGER;
+CREATE SEQUENCE SEQ_MANAGER
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE
+    NOCYCLE;
+-- ===============================
+-- 테이블 생성하기-------------------
+-- 코드 테이블---------------------- 
 DROP TABLE CODE;
 CREATE TABLE CODE(
     CODE       NUMBER(4)            
@@ -64,7 +81,7 @@ INSERT INTO CODE(CODE, P_CODE, CODE_NM, CODE_VAL, USE_YN, CODE_DESC, SORT_ORDER,
          VALUES (1005, 1000, 'BOOK_HOUSE', '북하우스', 'Y', '북하우스', 0, 5);
 COMMIT;
 
-
+-- 매니저 테이블 ---------------------------------------------
 DROP TABLE MANAGER;
 CREATE TABLE MANAGER(
     MANAGER_SEQ    NUMBER           
@@ -80,10 +97,12 @@ CREATE TABLE MANAGER(
   );
 -- MANAGER INSERT INTO 구문            
 INSERT INTO MANAGER(MANAGER_SEQ, MANAGER_ID, NAME, PASSWORD, REG_ID)
-         VALUES (0, 'admin', 'Jihwan', '1q2w3e', 0);
-         
+    VALUES(0, 'root', 'Jihwan(admin)', 'root', 0);
+INSERT INTO MANAGER(MANAGER_SEQ, MANAGER_ID, NAME, PASSWORD, REG_ID)
+    VALUES(SEQ_MANAGER.NEXTVAL, 'admin', '관리자', 'admin', 0);
 COMMIT;
 
+-- 북 테이블 ---------------------------------------------------------
 DROP TABLE BOOK;
 CREATE TABLE BOOK(
     BOOK_SEQ   NUMBER               
@@ -102,7 +121,7 @@ CREATE TABLE BOOK(
   , CONSTRAINT PK_BOOK              PRIMARY KEY(BOOK_SEQ)
   , CONSTRAINT U_BOOK_ISBN          UNIQUE(ISBN)
   );
--- MANAGER INSERT INTO 구문            
+-- BOOK INSERT INTO 구문            
 INSERT INTO BOOK(BOOK_SEQ, ISBN, TITLE, AUTHOR, CONTENT, COMPANY_CD, TOTAL_PAGE, PRICE, QUANTITY, REG_ID)
          VALUES (0, 'ISBN', '제목', '저자', '책 내용', 1000, 0, 0, 0, 0);
          
@@ -129,7 +148,7 @@ INSERT INTO BOOK(BOOK_SEQ, ISBN, TITLE, AUTHOR, CONTENT, COMPANY_CD, TOTAL_PAGE,
          VALUES (SEQ_BOOK.NEXTVAL, '9791159036514', '데미안(초판본)(리커버 한정판)', '헤르만 헤세', '싱클레어는 부모의 따뜻한 보살핌과 기독교 신앙의 가르침 안에서 자라는 평범한 소년이었다. 그는 부모가 품어주는 밝은 세계가 주는 편안함 속에서 안락을 누렸지만, 동시에 부모의 세계 밖에 있는 어둠의 세계에도 두려움과 함께 호기심을 갖고 접촉하고 있었다. 그곳은 때로는 욕설과 싸움이 있었지만, 때로는 솔직한 감정의 교류가 그를 유혹하고 있었다. 싱클레어는 자신의 환경으로부터 밝음과 어둠의 두 세계를 발견하고 모두 마음에 품으면서, 어느 곳에도 온전히 속하지 못한 채 갈등하게 된다.', 1002, 248, 10800, 5, 9);         
          
 INSERT INTO BOOK(BOOK_SEQ, ISBN, TITLE, AUTHOR, CONTENT, COMPANY_CD, TOTAL_PAGE, PRICE, QUANTITY, REG_ID)
-         VALUES (SEQ_BOOK.NEXTVAL, '9791190065672', '박막례 이대로 죽을 순 없다(땡큐 에디션) ', '박막례', '책 내용', 1003, 344, 13320, 5, 10); 
+         VALUES (SEQ_BOOK.NEXTVAL, '9791190065672', '박막례 이대로 죽을 순 없다', '박막례', '책 내용', 1003, 344, 13320, 5, 10); 
 INSERT INTO BOOK(BOOK_SEQ, ISBN, TITLE, AUTHOR, CONTENT, COMPANY_CD, TOTAL_PAGE, PRICE, QUANTITY, REG_ID)
          VALUES (SEQ_BOOK.NEXTVAL, '9791162202913', '모든 순간이 너였다', '하태완', '사랑, 청춘, 삶에 대해 써내려 간 에세이집 《#너에게》와 SNS를 통해 사랑받은 하태완 작가의 두 번째 에세이 『모든 순간이 너였다』. 위로받고 싶을 때, 설레고 싶을 때, 사람에게 상처받았을 때, 삶의 모든 순간에 특별한 위로와 공감을 건네는 이야기를 담았다.', 1003, 272, 12420, 5, 11); 
  
@@ -144,25 +163,184 @@ INSERT INTO BOOK(BOOK_SEQ, ISBN, TITLE, AUTHOR, CONTENT, COMPANY_CD, TOTAL_PAGE,
          VALUES (SEQ_BOOK.NEXTVAL, '9788956055619', '영어 그림책의 기적', '전은주', '『영어 그림책의 기적』는 아이들이 공부라는 방식에서 벗어나 읽기를 통해 영어 실력을 키울 수 있도록 도와주는 책이다. 아이의 영어 교육은 모든 엄마의 고민이라고 할 수 있는데, 이 책은 그런 고민의 해결 방안을 제시해준다. 보다 즐겁게, 살아 있는 언어로 영어를 배울 수 있도록 영어 그림책을 소개한 것. 실생활에서 쓰는 자연스러운 표현을 익힐 수 있고, 독서습관을 잡는데도 효과적이다.', 1005, 376, 13500, 5, 15);         
 COMMIT;
 
-
-DROP SEQUENCE SEQ_BOOK;
-CREATE SEQUENCE SEQ_BOOK
-    START WITH 1
-    INCREMENT BY 1
-    NOMAXVALUE
-    NOCYCLE;
-   
-CREATE SEQUENCE SEQ_MANAGER
-    START WITH 1
-    INCREMENT BY 1
-    NOMAXVALUE
-    NOCYCLE;
-
 /*---------------------------------------------------------------------------------
     출판사 번호와 출판사 이름을 코드로 관리
     출판사 관련 코드는 1000번대가 출판사 코드
     자세한 개별 출판사의 정보는 1001, 1002, 1003, ... 순서로 증가하도록 설계 데이터를 넣고 시작
     -------------------------------------------------------------------------------
     개발할 때는 최소한의 데이터를 넣고 시작해야 조회가 됨!! 반드시 기본 데이터를 넣어줘야함
-*/
+    ------------------------------------------------
+    출판사명이 같이 보이는 뷰를 작성
+    ------------------------------------------------*/
+CREATE OR REPLACE VIEW v_book AS
+SELECT b.book_seq   , b.isbn    , b.title
+     , b.author     , b.content , b.company_cd
+     , c.code_val company_nm
+     , b.total_page , b.price   , b.quantity
+     , b.reg_id     , b.reg_date
+     , b.mod_id     , b.mod_date
+  FROM BOOK b JOIN code c ON b.company_cd = c.code
+WITH READ ONLY
+;
+-- --------------------------------------------------
+-- 쿼리 증명하기 --------------------------------------
+-- 1. 1건 입력 쿼리
+INSERT INTO BOOK(BOOK_SEQ, ISBN, TITLE, AUTHOR, CONTENT, COMPANY_CD, TOTAL_PAGE, PRICE, QUANTITY, REG_ID)
+    VALUES(SEQ_BOOK.NEXTVAL, '', '', '', '', 1003, 192, 10800, 5, 0)
+;
+--ROLLBACK;
 
+-- 2. 1건 삭제 쿼리
+DELETE BOOK b
+ WHERE b.book_seq = 1
+;
+-- ROLLBACK;
+
+-- 3. 1건 수정 쿼리
+UPDATE BOOK b
+   SET b.isbn = ''
+     , b.title = '채식주의자(수정)'
+     , b.author = ''
+     , b.content = ''
+     , b.company_cd = ''
+     , b.total_page = ''
+     , b.price = ''
+     , b.quantity = ''
+     , b.mod_id = ''
+     , b.mod_date = SYSDATE
+ WHERE b.book_seq = 1
+;
+-- ROLLBACK;
+
+-- 4. Book 테이블의 기본 쿼리들 작성
+--  1) 1건 조회 쿼리
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.company_cd
+     , b.company_nm
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b
+ WHERE b.book_seq = 1
+;
+
+--  2) 전체 조회쿼리
+--   (1) 출판사 코드로 조회
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.company_cd
+     , b.company_nm
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b
+ WHERE b.company_cd = 1001
+;
+
+--   (2) 일정 가격 이상인 도서 조회
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.compny_cd
+     , b.company_nm
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b
+ WHERE b.price >= 10000
+;
+
+--   (3) 가격 범위 도서 조회
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.company_cd
+     , b.company_nm
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b
+ WHERE b.price BETWEEN 10000 AND 15000
+;
+
+--   (4) 일정 가격 이하인 도서 조회
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.company_cd
+     , b.company_nm
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b
+ WHERE b.price <= 15000
+;
+--   (5) 제목, 저자, 출판사 조건 종합 조회
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.company_cd
+     , b.company_nm
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b
+ WHERE b.title Like '%다%'
+    OR b.author Like '%다%'
+    OR b.content Like '%다%'
+    OR b.company_nm Like '%다%'
+;
+
+-- 관리자 로그인 쿼리----------------------
+SELECT m.manager_seq
+  FROM MANAGER m
+ WHERE m.manager_id = 'admin'
+   AND m.password = 'admin'
+; 
+-- 출판사 코드 조회 쿼리-------------------
+SELECT c.code
+     , c.code_nm
+     , c.code_val
+  FROM CODE c
+ WHERE c.p_code = 1000
+   AND c.use_yn = 'Y'
+;

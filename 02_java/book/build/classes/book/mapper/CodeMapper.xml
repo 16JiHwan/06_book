@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book.mapper.CodeMapper">
+	<select id="selectCompanies" resultType="Code">
+		SELECT c.code
+	         , c.code_nm
+	         , c.code_val
+	      FROM CODE c
+		 WHERE c.p_code = 1000
+	   	   AND c.use_yn = 'Y'
+	</select>
+</mapper>

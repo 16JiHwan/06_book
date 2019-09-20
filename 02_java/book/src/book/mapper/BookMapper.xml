@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book.mapper.BookMapper">
+
+	<!-- 1건 조회 혹은 전체 목록조회 쿼리 -->
+	<select id="select" parameterType="Book" resultType="Book">
+	
+	</select>
+	
+	<!-- 출파나 코드로 검색 -->
+	<select id="searchByCompnyCd" parameterType="Code" resultType="Book">
+	
+	</select>
+	
+	<!-- 일정 가격 이하 도서 검색 -->
+	<!-- 파라미터 타입이 객첼가 아닌 정보가 들어왔으므로
+		 where의 값이  #{value}가 되어야 됨 -->
+	<!-- 부등호 쓸때 <![CDATA[<=]]>로 감싸줘야 적용됨!! -->
+	<select id="searchByBelowPrice" parameterType="int" resultType="Book">
+	
+	</select>
+	
+	<!-- 가격 범위 도서 검색 -->
+	<!-- 객체타입이 와야할 때 맵을 주면 MIN과 MAX 두개의 값을 줄 수 있다 -->
+	<!-- KEY 값으로 넘겨야함 -->
+	<select id="searchByPrice" parameterType="Map" resultType="Book">
+	
+	</select> 
+	
+	<!-- 일정 가격 이상 도서 검색 -->
+	<!-- 부등호 쓸때 <![CDATA[<=]]>로 감싸줘야 적용됨!! -->
+	<select id="searchByOverPrice" parameterType="int" resultType="Book">
+	
+	</select>
+	
+	<!-- 제목, 저자, 출판사명 종합조회 -->
+	<!-- 키워드가 하나기 때문에 String으로도 충분함 -->
+	<!-- 파라미터 타입이 객첼가 아닌 정보가 들어왔으므로
+		 where의 값이  #{value}가 되어야 됨 -->
+	<select id="searchByAll" parameterType="String" resultType="Book">
+		
+	</select>
+	
+	<!-- 도서정보 1건 입력 -->
+	<insert id="insert" parameterType="Book">
+		INSERT INTO BOOK
+			(BOOK_SEQ
+			, ISBN, TITLE
+			, AUTHOR
+			, CONTENT
+			, COMPANY_CD
+			, TOTAL_PAGE
+			, PRICE
+			, QUANTITY
+			, REG_ID)
+         VALUES 
+         	(SEQ_BOOK.NEXTVAL
+         	, #{isbn}
+         	, #{title}
+         	, #{author}
+         	, #{content}
+         	, #{companyCd}
+         	, #{totalPage}
+         	, #{price}
+         	, #{quantity}
+         	, #{modId)
+	</insert>
+	
+	<!-- 도서 정보 1건 수정 -->
+	<!-- insert처럼 구문추가를 해야 값이 저장됨 -->
+	<!-- admin iD를 #{modID}로 입력해둠 -->
+	<update id="update" parameterType="Book">
+	
+	</update>
+	
+	<!-- 도서정보 1건 삭제 -->
+	<delete id="delete" parameterType="Book">
+		DELETE BOOK b
+		 WHERE b.book_seq = #{value}
+	</delete>
+	
+	<!-- 도서 1건 존재 여부 검색 -->
+	<select id="isExists" parameterType="Book" resultType="int">
+		SELECT
+		  FROM book b
+		 WHERE b.bookSeq = #{bookSeq}
+	</select>
+	
+	
+</mapper>

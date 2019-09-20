@@ -1,15 +1,15 @@
 package book.vo;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 public class Code {
-	private BigInteger code;
-	private BigInteger pCode;
+	private BigDecimal code;
+	private BigDecimal pCode;
 	private String codeNm;
 	private String codeVal;
 	private Character useYn;
 	private String codeDesc;
-	private BigInteger sortOrder;
+	private BigDecimal sortOrder;
 	private String regId;
 	private String regDate;
 	private String modId;

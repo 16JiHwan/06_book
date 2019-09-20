@@ -1,6 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>book</display-name>
+  
+ <servlet>
+ 	<servlet-name>indexJsp</servlet-name>
+ 	<jsp-file>/WEB-INF/views/index.jsp</jsp-file>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>indexJsp</servlet-name>
+ 	<url-pattern>/index</url-pattern>
+ </servlet-mapping>
+  
+ <servlet>
+ 	<servlet-name>headerJsp</servlet-name>
+ 	<jsp-file>/WEB-INF/views/header.jsp</jsp-file>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>headerJsp</servlet-name>
+ 	<url-pattern>/header</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+ 	<servlet-name>menuJsp</servlet-name>
+ 	<jsp-file>/WEB-INF/views/menu.jsp</jsp-file>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>menuJsp</servlet-name>
+ 	<url-pattern>/menu</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+ 	<servlet-name>footerJsp</servlet-name>
+ 	<jsp-file>/WEB-INF/views/footer.jsp</jsp-file>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>footerJsp</servlet-name>
+ 	<url-pattern>/footer</url-pattern>
+ </servlet-mapping>
+ 
+ <!-- ==================================================== -->
+ 
+ <servlet>
+ 	<servlet-name>bookListJsp</servlet-name>
+ 	<jsp-file>/WEB-INF/views/book/list.jsp</jsp-file>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>bookListJsp</servlet-name>
+ 	<url-pattern>/listBook</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+	<servlet-name>bookDetailJsp</servlet-name>
+ 	<jsp-file>/WEB-INF/views/book/detail.jsp</jsp-file>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>bookDetailJsp</servlet-name>
+ 	<url-pattern>/detailBook</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+ 	<servlet-name>bookUpdateJsp</servlet-name>
+ 	<jsp-file>/WEB-INF/views/book/update.jsp</jsp-file>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>bookUpdateJsp</servlet-name>
+ 	<url-pattern>/updateBook</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+ 	<servlet-name>bookInsertJsp</servlet-name>
+ 	<jsp-file>/WEB-INF/views/book/insert.jsp</jsp-file>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>bookInsertJsp</servlet-name>
+ 	<url-pattern>/insertBook</url-pattern>
+ </servlet-mapping>
+ 
+ <!-- ==================================================== -->
+ <servlet>
+ 	<servlet-name>loginJsp</servlet-name>
+ 	<jsp-file>/WEB-INF/views/login/login.jsp</jsp-file>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>loginJsp</servlet-name>
+ 	<url-pattern>/loginJsp</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+ 	<servlet-name>loginMsgJsp</servlet-name>
+ 	<jsp-file>/WEB-INF/views/login/message.jsp</jsp-file>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>loginMsgJsp</servlet-name>
+ 	<url-pattern>/loginMsgJsp</url-pattern>
+ </servlet-mapping>
+ 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
